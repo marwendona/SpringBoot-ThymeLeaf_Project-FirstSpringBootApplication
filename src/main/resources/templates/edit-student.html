@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/students.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<h1>Edit Student</h1>
+<form th:action="@{update}" method="POST">
+    <table>
+        <tr>
+            <td> Id:</td>
+            <td><input type="text" name="id" th:value="${student.id}" readonly /></td>
+        </tr>
+        <tr>
+            <td> Name:</td>
+            <td><input type="text" name="name" th:value="${student.name}" /></td>
+        </tr>
+        <tr>
+            <td> Gender:</td>
+            <td><input type="text" name="gender" th:value="${student.gender}" /></td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td><input type="submit" value="Update" class="btn btn-primary" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
