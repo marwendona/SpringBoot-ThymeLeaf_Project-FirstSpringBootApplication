@@ -56,7 +56,7 @@ public class StudentController {
 
     @PostMapping("/update")
     public String update(@RequestParam(name = "id") int id, @ModelAttribute StudentDto studentDto) {
-        studentService.update(studentDto);
+        studentService.update(id, studentDto);
 
         return "redirect:/students/";
     }

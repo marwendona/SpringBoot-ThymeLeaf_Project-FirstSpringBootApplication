@@ -32,17 +32,19 @@ public class StudentService {
         return students.stream().filter(std -> std.getId() == id).findAny().orElse(null);
     }
 
-//    public void update(int id, StudentDto studentDto) {
-//        StudentDto studentDtoFromDb = findById(id);
-//
-//        studentDtoFromDb.setName(studentDto.getName());
-//        studentDtoFromDb.setGender(studentDto.getGender());
-//    }
+    public void update(int id, StudentDto studentDto) {
+        StudentDto studentDtoFromDb = findById(id);
 
-    //2eme methode
-    public void update(StudentDto studentDto) {
-        students.set(students.indexOf(studentDto), studentDto);
+        if (studentDtoFromDb != null) {
+            studentDtoFromDb.setName(studentDto.getName());
+            studentDtoFromDb.setGender(studentDto.getGender());
+        }
     }
+
+//    //2eme methode
+//    public void update(StudentDto studentDto) {
+//        students.set(students.indexOf(studentDto), studentDto);
+//    }
 
     public List<StudentDto> findAllByName(String name) {
         return students.stream().filter(std -> std.getName().startsWith(name)).collect(Collectors.toList());
