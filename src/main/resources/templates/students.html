@@ -2,13 +2,20 @@
 <head>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="text-center">
 <script src="/js/jquery-3.6.0.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/students.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<h1>List of Students</h1>
-<table class="table table-striped">
+<h1 class="fw-bold">List of Students</h1>
+<form th:action="@{search}" method="POST">
+    <div style="display: flex; justify-content: flex-end; margin-right: 5%;">
+        <input type="text" class="form-control" placeholder="Name" aria-describedby="button-addon2"
+               style="width: 20%;" name="name"/>
+        <input type="submit" value="Search" class="btn btn-outline-secondary"/>
+    </div>
+</form>
+<table class="table table-striped mx-auto" style="width: 90%;">
     <tr>
         <th>Id</th>
         <th>Name</th>
@@ -16,15 +23,6 @@
         <th>Delete</th>
         <th>Delete-Ajax</th>
         <th>Edit</th>
-        <th>
-            <form th:action="@{search}" method="POST">
-                <div style="display: flex;">
-                    <input type="text" class="form-control" placeholder="Name" aria-describedby="button-addon2"
-                           style="width: 100px;" name="name"/>
-                    <input type="submit" value="Search" class="btn btn-outline-secondary"/>
-                </div>
-            </form>
-        </th>
     </tr>
     <tr th:each="student: ${students}">
         <td th:text="${student.id}"/>
@@ -49,25 +47,26 @@
     </tr>
 </table>
 </br>
-<form th:action="@{save}" method="POST">
-    <table class="table table-striped">
+</br>
+</br>
+<h1 class="fw-bold">Add a Student</h1>
+<form th:action="@{save}" method="POST" class="d-inline-block">
+    <table class="table table-info table-hover mx-auto">
         <tr>
             <th>Id</th>
-            <td><input type="text" name="id"/></td>
+            <td><input class="form-control" type="text" name="id"/></td>
         </tr>
         <tr>
             <th>Name</th>
-            <td><input type="text" name="name"/></td>
+            <td><input class="form-control" type="text" name="name"/></td>
         </tr>
         <tr>
             <th>Gender</th>
-            <td><input type="text" name="gender"/></td>
+            <td><input class="form-control" type="text" name="gender"/></td>
         </tr>
         <tr>
             <th>Action</th>
-            <td>
-                <input class="btn btn-success" type="submit" value="Save">
-            </td>
+            <td class="text-center"><input class="btn btn-success" type="submit" value="Save"></td>
         </tr>
     </table>
 </form>
