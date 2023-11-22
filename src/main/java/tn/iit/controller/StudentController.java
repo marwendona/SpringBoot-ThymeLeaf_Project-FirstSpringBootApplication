@@ -61,7 +61,7 @@ public class StudentController {
         return "redirect:/students/";
     }
 
-    @PostMapping({ "/search" })
+    @PostMapping("/search")
     public ModelAndView findAllByName(@RequestParam(name = "name") String name) {
         ModelAndView modelAndView = new ModelAndView();
         if (!"".equals(name)) {

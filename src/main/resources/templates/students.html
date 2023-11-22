@@ -8,7 +8,7 @@
 <script src="/js/students.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <h1 class="fw-bold">List of Students</h1>
-<form th:action="@{search}" method="POST">
+<form th:action="@{/students/search}" method="POST">
     <div style="display: flex; justify-content: flex-end; margin-right: 5%;">
         <input type="text" class="form-control" placeholder="Name" aria-describedby="button-addon2"
                style="width: 20%;" name="name"/>
@@ -36,10 +36,10 @@
         <!--            <span th:if="${student.gender} == 'M'" th:text="Male" />-->
         <!--            <span th:unless="${student.gender} == 'M'" th:text="Female" />-->
         <!--        </td>-->
-        <td><a th:href="'/students/delete/'+${student.id}" class="btn btn-danger">Delete</a>
+        <td><a th:href="'/students/delete/'+${student.id}" class="btn btn-danger">Delete</a></td>
         <td><a th:href="'javascript:deleteStudent('+${student.id}+')'" class="btn btn-danger">Delete</a></td>
         <td>
-            <form th:action="@{edit}" method="POST">
+            <form th:action="@{/students/edit}" method="POST">
                 <input type="hidden" name="id" th:value="${student.id}"/>
                 <input class="btn btn-outline-info" type="submit" value="Edit">
             </form>
@@ -50,7 +50,7 @@
 </br>
 </br>
 <h1 class="fw-bold">Add a Student</h1>
-<form th:action="@{save}" method="POST" class="d-inline-block">
+<form th:action="@{/students/save}" method="POST" class="d-inline-block">
     <table class="table table-info table-hover mx-auto">
         <tr>
             <th>Id</th>
