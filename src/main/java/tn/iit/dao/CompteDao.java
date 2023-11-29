@@ -1,48 +1,31 @@
 package tn.iit.dao;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import tn.iit.entity.Compte;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public class CompteDao {
-    @PersistenceContext
-    private EntityManager entityManager;
+public interface CompteDao extends JpaRepository<Compte, Integer> {
 
-    @Transactional
-    public void save(Compte compte) {
-        entityManager.persist(compte);
-    }
+    @Query("select c from Compte c where c.nomClient = ?1")
+    List<Compte> findByNomClient1(String nomClient);
 
-    @Transactional
-    public void delete(Compte compte) {
-        entityManager.remove(compte);
-    }
+    @Query("select c from Compte c where c.nomClient = :nc")
+    List<Compte> findByNomClient2(@Param("nc") String nomClient);
 
-    @Transactional
-    public void update(Compte compte) {
-        entityManager.merge(compte);
-    }
+    @Query(nativeQuery = true,value="select * from t_compte c where c.client = :nc")
+    List<Compte> findByNomClient3(@Param("nc") String nomClient);
 
-    public List<Compte> findAll() {
-        return entityManager.createQuery("select c from Compte c", Compte.class).getResultList();
-    }
+    @Query("select c from Compte c where c.nomClient = ?1 and c.solde >= ?2")
+    List<Compte> findByNomClientAndSolde1(String nomClient, float solde);
 
-    public Optional<Compte> findById(Integer rib) {
-        Compte compte = entityManager.find(Compte.class, rib);
-        return Optional.ofNullable(compte);
-    }
+    @Query("select c from Compte c where c.nomClient = :nc and c.solde >= :solde")
+    List<Compte> findByNomClientAndSolde2(@Param("nc") String nomClient, @Param("solde") float solde);
 
-    @Transactional
-    public void deleteById(Integer rib) {
-        Compte compte = entityManager.find(Compte.class, rib);
-        if (compte != null) {
-            entityManager.remove(compte);
-        }
-    }
+    @Query(nativeQuery = true,value="select * from t_compte c where c.client = ?1 and c.solde >= ?2")
+    List<Compte> findByNomClientAndSolde3(String nomClient, float solde);
 }
